@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
 from .models import Hall
 from django.contrib.auth import authenticate,login
-
+from.forms import VideoForm
 def home(request):
     return render(request,'halls/home.html')
 
@@ -30,7 +30,7 @@ class CreateHall(generic.CreateView):
     model= Hall
     fields=['title']
     template_name= 'halls/create_hall.html'
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('dashboard')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -41,3 +41,22 @@ class CreateHall(generic.CreateView):
 class DetailHall(generic.DetailView):
     model= Hall
     template_name='halls/detail_hall.html'
+
+
+class UpdateHall(generic.UpdateView):
+    model= Hall
+    template_name='halls/update_hall.html'
+    fields=['title']
+    success_url=reverse_lazy('dashboard')
+
+
+class DeleteHall(generic.DeleteView):
+    model= Hall
+    template_name='halls/delete_hall.html'
+    success_url=reverse_lazy('dashboard')
+
+
+def add_video(request, pk):
+    form= VideoForm()
+
+    return render(request ,'halls/add_video.html' , {'form':form})
