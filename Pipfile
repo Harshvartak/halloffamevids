@@ -7,9 +7,10 @@ verify_ssl = true
 
 [packages]
 django = "*"
-json = "*"
 psycopg2 = "*"
 pillow = "*"
+django-widget-tweaks = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
